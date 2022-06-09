@@ -1,10 +1,12 @@
 <template>
     <main class="container">
-        <div class="movie-container" v-for="movie in movies" :key="movie.id">
-            <h3>Title: {{movie.title}}</h3>
-            <h5>Original Title: {{movie.original_title}}</h5>
-            <p>Language: {{movie.original_language.toUpperCase()}}</p>
-            <p>Vote: {{movie.vote_average}}</p>
+        <div class="row movie-container" v-for="movie in filteredMovies" :key="movie.id">
+            <div class="movie-card">
+                <h3>Title: {{movie.title}}</h3>
+                <h5>Original Title: {{movie.original_title}}</h5>
+                <p>Language: {{movie.original_language.toUpperCase()}}</p>
+                <p>Vote: {{movie.vote_average}}</p>
+            </div>
         </div>
     </main>
 </template>
@@ -22,13 +24,12 @@ export default {
 
     data() {
         return {
-            movies: [],
             sharedData,
         }
     },
 
     methods: {
-        searchQuery() {
+        filterMovies() {
 
             const filteredMovies = [];
 
@@ -37,8 +38,8 @@ export default {
                 api_key:'a47071b498cef0a1a6bae7d279b30e03',
                 query: sharedData.searchText,
                 language: 'it-IT',
-                adult: 'false',
                 }
+
             }).then((response) => {
                 // handle success
                 filteredMovies.push(...response.data.results);
@@ -47,8 +48,18 @@ export default {
                 // handle error
                 console.log(error);
             });
+
+            return filteredMovies
         }
     },
+
+    computed: {
+        filteredMovies() {
+
+            return this.filterMovies()
+
+        }
+    }
 
 }
 </script>
