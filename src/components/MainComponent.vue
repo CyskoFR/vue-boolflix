@@ -1,6 +1,6 @@
 <template>
     <main class="container">
-        <div class="row movie-container" v-for="movie in films" :key="movie.id">
+        <div class="row movie-container" v-for="movie in movies" :key="movie.id">
             <movieCard :card="movie"/>
         </div>
     </main>
@@ -20,7 +20,7 @@ export default {
 
         return {
             sharedData,
-            films: []
+            movies: [],
         }
 
     },
@@ -43,7 +43,7 @@ export default {
 
             }).then((response) => {
                 // handle success
-                this.films = response.data.results;
+                this.movies = response.data.results;
             }).catch(function (error) {
                 // handle error
                 console.log(error);
