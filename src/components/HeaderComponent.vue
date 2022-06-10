@@ -1,7 +1,7 @@
 <template>
     <header>
         <div class="container d-flex justify-content-end py-2">
-            <input id="input" class="mx-2" type="text" placeholder="Input title" @keyup.enter="inputSearch()"/>
+            <input id="input" class="mx-2" type="text" placeholder="Input title" v-model="search" @keyup.enter="inputSearch()"/>
             <button type="button" class="btn btn-outline-secondary" @click="inputSearch()">Search</button>
         </div>
     </header>
@@ -16,16 +16,19 @@ export default {
     name: 'HeaderComponent',
 
     data() {
+
         return {
             sharedData,
+            search: '',
         };
+        
     },
 
     methods: {
 
         inputSearch() {
-            this.sharedData.searchText = document.getElementById("input").value;
-            document.getElementById("input").value = "";
+            this.sharedData.searchText = this.search;
+            this.search = '';
         }
 
     }
