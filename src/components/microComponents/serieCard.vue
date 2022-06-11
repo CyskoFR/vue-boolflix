@@ -1,11 +1,11 @@
 <template>
-    <div class="movie-card">
-        <div class="movie-card_img">
-            <img :src="card.poster_path ? `https://image.tmdb.org/t/p/w342/${card.poster_path}` : require(`../../assets/img/spallucce.png`)" :alt="`${card.original_title}.img`">
+    <div class="series-card">
+        <div class="series-card_img">
+            <img :src="card.poster_path ? `https://image.tmdb.org/t/p/w200/${card.poster_path}` : require(`../../assets/img/spallucce.png`)" :alt="`${card.original_title}.img`">
         </div>
-        <div class="movie-card_text">
-            <h3>{{card.title}}</h3>
-            <h5>Original Title: {{card.original_title}}</h5>
+        <div class="series-card_text">
+            <h3>{{card.name}}</h3>
+            <h5>Original Title: {{card.original_name}}</h5>
             <p class="language"><img :src="checkFlag(card.original_language) ? require(`../../assets/img/flags/${card.original_language}.png`) : require(`../../assets/img/flags/placeholder-flag-48.png`)" alt="flag.png"> {{card.original_language.toUpperCase()}}</p>
             <p class="vote">Vote: {{card.vote_average}}</p>
             <div class="star-box">
@@ -24,7 +24,7 @@
 
 export default {
 
-    name: 'movieCard',
+    name: 'serieCard',
 
     data() {
 
@@ -58,17 +58,19 @@ export default {
 
         getFilledStarsPerc(voteNumber) {
             let percentage = (`${voteNumber*10}%`);
+            console.log(percentage)
             return percentage
         }
-        
+
     }
+    
 }
 
 </script>
 
 <style lang="scss" scoped>
 
-.movie-card {
+.series-card {
     display: inline-flex;
     width: 400px;
     height: 340px;
@@ -77,7 +79,7 @@ export default {
     margin: 10px;
     border-radius: 8px;
 
-    .movie-card_img {
+    .series-card_img {
         display: flex;
         margin-right: 8px;
         width: 50%;
@@ -88,7 +90,7 @@ export default {
 
     }
 
-    .movie-card_text {
+    .series-card_text {
         width: 50%;
 
         h3 {
@@ -131,20 +133,21 @@ export default {
         .filled-stars_box {
             overflow: hidden;
             z-index: 1;
+
         }
 
     }
 
     #empty-star, #filled-star {
-        filter: drop-shadow(1px 1px 1px rgb(135, 135, 135));
+        filter: drop-shadow(1px 1px 1px grey);
     }
 
     #empty-star {
-        color: grey;
+        color: black;
     }
 
     #filled-star {
-        color: rgb(255, 234, 0);
+        color: gold;
     }
 
 }

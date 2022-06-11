@@ -29,4 +29,8 @@ export default {
 
 @import './assets/style/global.scss';
 
+#app {
+  background-color: rgb(178, 178, 178);
+}
+
 </style>

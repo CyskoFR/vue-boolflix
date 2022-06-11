@@ -1,10 +1,10 @@
 <template>
     <header>
         <div class="container d-flex justify-content-between">
-            <img src="../assets/img/netflix-extended-logo.png" alt="netflix-extended-logo.png">
+            <img src="../assets/img/boolflix-extended-logo.png" alt="netflix-extended-logo.png">
             <div class="input-field d-flex">
-                <input id="input" type="text" placeholder="Input title" spellcheck="false" v-model="search" @keyup.enter="inputSearch()"/>
-                <button type="button" class="search-button btn btn-outline-secondary" @click="inputSearch()">Search</button>
+                <input id="input" type="text" placeholder="Search here..." spellcheck="false" v-model="search" @keyup.enter="inputSearch()"/>
+                <button type="button" class="search-button btn btn-outline-secondary" @click="inputSearch()">Go</button>
                 <button type="button" class="home-button btn btn-outline-secondary" onClick="window.location.reload()"><i class="fa-solid fa-house-chimney"></i></button>
             </div>
         </div>
@@ -55,6 +55,7 @@ header {
 
         img {
             height: 100%;
+            filter: drop-shadow(1px 1px 2px black);
         }
 
         .input-field {
