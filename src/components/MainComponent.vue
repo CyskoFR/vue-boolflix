@@ -1,11 +1,11 @@
 <template>
     <main class="container py-3">
         <div class="movies-container mb-4">
-            <h2>MOVIES:</h2>
-            <movieCard :card="movie" v-for="movie in movies" :key="movie.id"/>
+            <h2 class="section-title mb-3">MOVIES:</h2>
+            <movieCard :card="movie" :genres="moviesGenre" v-for="movie in movies" :key="movie.id"/>
         </div>
-        <div class="series-container mb-4">
-            <h2>SERIES:</h2>
+        <div class="series-container">
+            <h2 class="section-title mb-3">SERIES:</h2>
             <serieCard :card="serie" v-for="serie in series" :key="serie.id"/>
         </div>
     </main>
@@ -28,6 +28,8 @@ export default {
             sharedData,
             movies: [],
             series: [],
+            moviesGenre: [],
+            seriesGenre: [],
         }
 
     },
@@ -42,13 +44,13 @@ export default {
     watch: {
 
         'sharedData.searchText': function(){
+            //API movies
             axios.get('https://api.themoviedb.org/3/search/movie', {
                 params: {
                 api_key:'a47071b498cef0a1a6bae7d279b30e03',
                 query: sharedData.searchText,
                 language: 'it-IT',
                 }
-
             }).then((response) => {
                 // handle success
                 this.movies = response.data.results;
@@ -57,16 +59,44 @@ export default {
                 console.log(error);
             });
 
+            //API series
             axios.get('https://api.themoviedb.org/3/search/tv', {
                 params: {
                 api_key:'a47071b498cef0a1a6bae7d279b30e03',
                 query: sharedData.searchText,
                 language: 'it-IT',
                 }
-
             }).then((response) => {
                 // handle success
                 this.series = response.data.results;
+            }).catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+            //API movies genre
+            axios.get('https://api.themoviedb.org/3/genre/movie/list', {
+                params: {
+                api_key:'a47071b498cef0a1a6bae7d279b30e03',
+                language: 'it-IT',
+                }
+            }).then((response) => {
+                // handle success
+                this.moviesGenre = response.data.genres;
+            }).catch(function (error) {
+                // handle error
+                console.log(error);
+            });
+
+            //API series genre
+            axios.get('https://api.themoviedb.org/3/genre/tv/list', {
+                params: {
+                api_key:'a47071b498cef0a1a6bae7d279b30e03',
+                language: 'it-IT',
+                }
+            }).then((response) => {
+                // handle success
+                this.seriesGenre = response.data.genres;
             }).catch(function (error) {
                 // handle error
                 console.log(error);
@@ -86,6 +116,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         min-height: calc(100vh - 80px);
+        background-color: rgba(0, 0, 0, 0.95);
     }
 
     .movies-container, .series-container {
@@ -94,8 +125,9 @@ export default {
         flex-wrap: wrap;
         justify-content: center;
 
-        h2 {
+        .section-title {
             width: 100%;
+            color: white;
         }
 
     }

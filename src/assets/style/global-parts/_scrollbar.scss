@@ -1,0 +1,26 @@
+/* Scroll bar stylings */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: rgb(238, 238, 238); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(45deg, #b52020, rgb(238, 238, 238));
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(45deg, #e70f0f, rgb(238, 238, 238));
+}
+
+/* Works on Firefox Browser */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: #b52020 rgb(238, 238, 238);
+}

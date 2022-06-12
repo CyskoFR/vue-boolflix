@@ -4,16 +4,20 @@
             <img :src="card.poster_path ? `https://image.tmdb.org/t/p/w342/${card.poster_path}` : require(`../../assets/img/spallucce.png`)" :alt="`${card.original_title}.img`">
         </div>
         <div class="movie-card_text">
-            <h3>{{card.title}}</h3>
-            <h5>Original Title: {{card.original_title}}</h5>
-            <p class="language"><img :src="checkFlag(card.original_language) ? require(`../../assets/img/flags/${card.original_language}.png`) : require(`../../assets/img/flags/placeholder-flag-48.png`)" alt="flag.png"> {{card.original_language.toUpperCase()}}</p>
-            <p class="vote">Vote: {{card.vote_average}}</p>
-            <div class="star-box">
-                <div class="empty-stars_box">
-                    <div class="empty-stars" v-for="i in 5" :key="i"><i id="empty-star" class="fa-regular fa-star"></i></div>
-                </div>
-                <div class="filled-stars_box" :style="{'width':getFilledStarsPerc(card.vote_average)}">
-                    <div class="filled-stars" v-for="i in 5" :key="i"><i id="filled-star" class="fa-solid fa-star"></i></div>
+            <div class="movie-info_box">
+                <h3 class="title">{{card.title}}</h3>
+                <div class="original-title">(<img class="flag-img" :src="checkFlag(card.original_language) ? require(`../../assets/img/flags/${card.original_language}.png`) : require(`../../assets/img/flags/placeholder-flag-48.png`)" alt="flag.png">{{card.original_language.toUpperCase()}}: {{card.original_title}} )</div>
+                <div class="genre" v-for="genre in getGenre(card.genre_ids, genres)" :key="genre">{{genre}}</div>
+            </div>
+            <div class="movie-rating_box">
+                <p class="vote">Rating: {{card.vote_average}} out of {{card.vote_count}} votes</p>
+                <div class="star-box">
+                    <div class="empty-stars_box">
+                        <div class="empty-stars" v-for="i in 5" :key="i"><i id="empty-star" class="fa-regular fa-star"></i></div>
+                    </div>
+                    <div class="filled-stars_box" :style="{'width':getFilledStarsPerc(card.vote_average)}">
+                        <div class="filled-stars" v-for="i in 5" :key="i"><i id="filled-star" class="fa-solid fa-star"></i></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -48,6 +52,7 @@ export default {
 
     props: {
         card: Object,
+        genres: Array,
     },
 
     methods: {
@@ -59,7 +64,23 @@ export default {
         getFilledStarsPerc(voteNumber) {
             let percentage = (`${voteNumber*10}%`);
             return percentage
-        }
+        },
+
+        getGenre(cardGenreIdsArray, genresArrayOfObjs) {
+            let genresArray = [];
+            // cicle through 1st argument(array) getting every element
+            cardGenreIdsArray.forEach(elm => {
+                // cicle through 2nd argument(array of objects) getting every object
+                for (let i = 0; i < cardGenreIdsArray.length; i++) {
+                    // check if element matches object key(ID)
+                    if(elm == genresArrayOfObjs[i].id) {
+                        // if match is true, push key(name) in array
+                        genresArray.push(genresArrayOfObjs[i].name)
+                    }
+                }
+            });
+            return genresArray
+        },
         
     }
 }
@@ -72,15 +93,16 @@ export default {
     display: inline-flex;
     width: 400px;
     height: 340px;
-    background-color: lightgray;
+    background-color: rgba(211, 211, 211, 0.9);
     padding: 8px;
     margin: 10px;
     border-radius: 8px;
+    cursor: pointer;
 
     .movie-card_img {
         display: flex;
-        margin-right: 8px;
-        width: 50%;
+        padding: 16px 10px;
+        width: 45%;
 
         img {
             width: 100%;
@@ -89,28 +111,33 @@ export default {
     }
 
     .movie-card_text {
-        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 55%;
+        overflow-y: auto;
+        padding: 18px 0;
+        word-wrap: break-word;
 
-        h3 {
+        .title {
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
         }
 
-        h5 {
-            font-size: 1rem;
-        }
+        .original-title {
+            font-size: .875rem;
 
-        .language {
-            font-size: .75rem;
-        }
-
-        img {
-            height: 1.5rem;
+            .flag-img {
+            height: 1.2rem;
+            margin: 0 2px;
+            margin-bottom: 2px;
+            }
         }
 
         .vote {
             font-size: .75rem;
+            margin: 0;
         }
 
     }
@@ -136,17 +163,15 @@ export default {
     }
 
     #empty-star, #filled-star {
-        filter: drop-shadow(1px 1px 1px rgb(135, 135, 135));
+        filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+        color: rgb(255, 221, 0);
     }
 
-    #empty-star {
-        color: grey;
-    }
+}
 
-    #filled-star {
-        color: rgb(255, 234, 0);
-    }
-
+.movie-card:hover {
+    transition: 0.2s;
+    transform: scale(104%);
 }
 
 </style>

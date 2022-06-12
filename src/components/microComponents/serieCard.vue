@@ -3,11 +3,11 @@
         <div class="series-card_img">
             <img :src="card.poster_path ? `https://image.tmdb.org/t/p/w200/${card.poster_path}` : require(`../../assets/img/spallucce.png`)" :alt="`${card.original_title}.img`">
         </div>
-        <div class="series-card_text">
-            <h3>{{card.name}}</h3>
-            <h5>Original Title: {{card.original_name}}</h5>
+        <div class="series-card_text py-2">
+            <h3 class="title">{{card.name}}</h3>
+            <h5 class="original-title">Original Title: {{card.original_name}}</h5>
             <p class="language"><img :src="checkFlag(card.original_language) ? require(`../../assets/img/flags/${card.original_language}.png`) : require(`../../assets/img/flags/placeholder-flag-48.png`)" alt="flag.png"> {{card.original_language.toUpperCase()}}</p>
-            <p class="vote">Vote: {{card.vote_average}}</p>
+            <p class="vote">Rating: {{card.vote_average}}</p>
             <div class="star-box">
                 <div class="empty-stars_box">
                     <div class="empty-stars" v-for="i in 5" :key="i"><i id="empty-star" class="fa-regular fa-star"></i></div>
@@ -58,7 +58,6 @@ export default {
 
         getFilledStarsPerc(voteNumber) {
             let percentage = (`${voteNumber*10}%`);
-            console.log(percentage)
             return percentage
         }
 
@@ -74,15 +73,15 @@ export default {
     display: inline-flex;
     width: 400px;
     height: 340px;
-    background-color: lightgray;
+    background-color: rgba(211, 211, 211, 0.9);
     padding: 8px;
     margin: 10px;
     border-radius: 8px;
 
     .series-card_img {
         display: flex;
-        margin-right: 8px;
-        width: 50%;
+        padding: 16px 10px;
+        width: 45%;
 
         img {
             width: 100%;
@@ -91,15 +90,16 @@ export default {
     }
 
     .series-card_text {
-        width: 50%;
+        width: 55%;
+        overflow-y: auto;
 
-        h3 {
+        .title {
             font-size: 1.5rem;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin: 12px 0;
         }
 
-        h5 {
+        .original-title {
             font-size: 1rem;
         }
 
@@ -113,6 +113,7 @@ export default {
 
         .vote {
             font-size: .75rem;
+            margin: 0;
         }
 
     }
@@ -139,15 +140,8 @@ export default {
     }
 
     #empty-star, #filled-star {
-        filter: drop-shadow(1px 1px 1px grey);
-    }
-
-    #empty-star {
-        color: black;
-    }
-
-    #filled-star {
-        color: gold;
+        filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+        color: rgb(255, 221, 0);
     }
 
 }
