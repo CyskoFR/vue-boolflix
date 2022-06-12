@@ -1,5 +1,6 @@
 <template>
-    <div class="movie-card">
+    <div class="movie-card" >
+        <div class="movie-card_bg" :style="card.backdrop_path ? {'background-image': `url(https://image.tmdb.org/t/p/w500/${card.backdrop_path})`} : {'background-image': `url(https://image.tmdb.org/t/p/w500/${card.poster_path})`}"></div>
         <div class="movie-card_img">
             <img :src="card.poster_path ? `https://image.tmdb.org/t/p/w342/${card.poster_path}` : require(`../../assets/img/spallucce.png`)" :alt="`${card.original_title}.img`">
         </div>
@@ -71,7 +72,7 @@ export default {
             // cicle through 1st argument(array) getting every element
             cardGenreIdsArray.forEach(elm => {
                 // cicle through 2nd argument(array of objects) getting every object
-                for (let i = 0; i < cardGenreIdsArray.length; i++) {
+                for (let i = 0; i < genresArrayOfObjs.length; i++) {
                     // check if element matches object key(ID)
                     if(elm == genresArrayOfObjs[i].id) {
                         // if match is true, push key(name) in array
@@ -90,19 +91,37 @@ export default {
 <style lang="scss" scoped>
 
 .movie-card {
+    position: relative;
     display: inline-flex;
     width: 400px;
     height: 340px;
-    background-color: rgba(211, 211, 211, 0.9);
     padding: 8px;
     margin: 10px;
     border-radius: 8px;
     cursor: pointer;
+    background: rgb(177, 177, 177);
+
+
+    .movie-card_bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background-size: cover;
+        background-position: center;
+        border-radius: 8px;
+        filter: blur(4px);
+        background-color: #00000070;
+        background-blend-mode: multiply;
+    }
 
     .movie-card_img {
         display: flex;
         padding: 16px 10px;
         width: 45%;
+        z-index: 1;
+
 
         img {
             width: 100%;
@@ -118,6 +137,8 @@ export default {
         overflow-y: auto;
         padding: 18px 0;
         word-wrap: break-word;
+        color: white;
+        z-index: 1;
 
         .title {
             font-size: 1.5rem;
@@ -172,6 +193,10 @@ export default {
 .movie-card:hover {
     transition: 0.2s;
     transform: scale(104%);
+    .movie-card_bg {
+        transition: 0.3s;
+        filter: none;
+    }
 }
 
 </style>

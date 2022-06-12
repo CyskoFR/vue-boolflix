@@ -75,7 +75,7 @@ export default {
   background-color: black;
   background-image: url(./assets/img/logo-pattern.png);
   filter: blur(1.2px);
-  z-index: -1;
+  z-index: -9;
   width: 100%;
   height: 100%;
   top: 0;
@@ -96,6 +96,7 @@ export default {
   border-radius: 8px;
   cursor: pointer;
   padding: 6px 10px;
+  z-index: 99;
 }
 
 #pagetop:hover {
