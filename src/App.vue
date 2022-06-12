@@ -1,6 +1,7 @@
 <template>
   <div id="app" v-cloak>
     <div class="app-bg"></div>
+    <div class="app-bg2"></div>
     <HeaderComponent/>
     <MainComponent/>
     <transition name="fade">
@@ -72,14 +73,25 @@ export default {
 
 .app-bg {
   position: absolute;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.9);
   background-image: url(./assets/img/logo-pattern.png);
   filter: blur(1.2px);
-  z-index: -9;
+  z-index: -8;
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
+  background-blend-mode: multiply;
+}
+
+.app-bg2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: black;
+  z-index: -9;
 }
 
 #pagetop {

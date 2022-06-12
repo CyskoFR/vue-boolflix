@@ -122,9 +122,9 @@ export default {
         width: 45%;
         z-index: 1;
 
-
         img {
             width: 100%;
+            border-radius: 6px;
         }
 
     }
@@ -139,6 +139,7 @@ export default {
         word-wrap: break-word;
         color: white;
         z-index: 1;
+        text-shadow: 1px 1px 2px black;
 
         .title {
             font-size: 1.5rem;
@@ -148,6 +149,7 @@ export default {
 
         .original-title {
             font-size: .875rem;
+            margin-bottom: 8px;
 
             .flag-img {
             height: 1.2rem;
@@ -159,6 +161,16 @@ export default {
         .vote {
             font-size: .75rem;
             margin: 0;
+        }
+
+        .genre {
+            font-size: .625rem;
+            display: inline-flex;
+            margin: 3px;
+            background-color: #c10e1aea;
+            padding: 4px 8px;
+            border-radius: 8px;
+            box-shadow: 1px 1px 1px rgb(80, 79, 79);
         }
 
     }
@@ -184,7 +196,7 @@ export default {
     }
 
     #empty-star, #filled-star {
-        filter: drop-shadow(1px 1px 1px rgb(90, 90, 90));
+        filter: drop-shadow(1px 1px 1px black);
         color: rgb(255, 221, 0);
     }
 
