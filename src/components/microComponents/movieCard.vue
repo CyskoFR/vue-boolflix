@@ -1,5 +1,8 @@
 <template>
-    <div class="movie-card" >
+    <div class="movie-card" @click="isHidden = !isHidden">
+        <Transition>
+            <div class="movie-card_overlay" v-if="card.overview && !isHidden">{{card.overview}}</div>
+        </Transition>
         <div class="movie-card_bg" :style="card.backdrop_path ? {'background-image': `url(https://image.tmdb.org/t/p/w500/${card.backdrop_path})`} : {'background-image': `url(https://image.tmdb.org/t/p/w500/${card.poster_path})`}"></div>
         <div class="movie-card_img">
             <img :src="card.poster_path ? `https://image.tmdb.org/t/p/w342/${card.poster_path}` : require(`../../assets/img/spallucce.png`)" :alt="`${card.original_title}.img`">
@@ -47,8 +50,8 @@ export default {
             'ru',
             'us'
             ],
+            isHidden: true,
         }
-            
     },
 
     props: {
@@ -98,8 +101,8 @@ export default {
     padding: 8px;
     margin: 10px;
     border-radius: 8px;
-    cursor: pointer;
     background: rgb(177, 177, 177);
+    cursor: pointer;
 
 
     .movie-card_bg {
@@ -209,6 +212,31 @@ export default {
         transition: 0.3s;
         filter: none;
     }
+}
+
+.movie-card_overlay {
+    position: absolute;
+    display: flex;
+    text-align: center;
+    top: 0;
+    left: 0;
+    width: 400px;
+    height: 340px;
+    padding: 12px ;
+    border-radius: 12px;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.92);
+    color: rgb(217, 217, 217);
+    z-index: 3;
+    overflow-y: auto;
+}
+
+.v-enter-active, .v-leave-active {
+    transition: opacity 0.8s ease;
+}
+
+.v-enter-from, .v-leave-to {
+    opacity: 0;
 }
 
 </style>
