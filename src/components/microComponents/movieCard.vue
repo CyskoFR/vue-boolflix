@@ -224,7 +224,7 @@ export default {
     text-align: center;
     top: 0;
     left: 0;
-    width: 400px;
+    width: 100%;
     height: 340px;
     padding: 12px ;
     border-radius: 12px;
