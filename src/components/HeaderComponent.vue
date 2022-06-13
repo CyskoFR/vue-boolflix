@@ -1,10 +1,10 @@
 <template>
     <header>
-        <div class="container d-flex justify-content-between">
+        <div class="header-component container d-flex justify-content-between">
             <img src="../assets/img/boolflix-extended-logo.png" alt="netflix-extended-logo.png">
             <div class="input-field d-flex">
-                <input id="input" type="text" placeholder="Search here..." spellcheck="false" v-model="search" @keyup.enter="inputSearch()"/>
-                <button type="button" class="search-button btn btn-outline-secondary" @click="inputSearch()">Go</button>
+                <input id="input" type="text" placeholder="Search here..." spellcheck="false" v-model="search" @keyup.enter="inputSearch(); sharedData.showMain = true"/>
+                <button type="button" class="search-button btn btn-outline-secondary" @click="inputSearch(); sharedData.showMain = true">Go</button>
                 <button type="button" class="home-button btn btn-outline-secondary" onClick="window.location.reload()"><i class="fa-solid fa-house-chimney"></i></button>
             </div>
         </div>

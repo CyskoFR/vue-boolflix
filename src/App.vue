@@ -3,20 +3,22 @@
     <div class="app-bg"></div>
     <div class="app-bg2"></div>
     <HeaderComponent/>
-    <MainComponent/>
+    <OnLoadMain v-show="sharedData.showMain == false"/>
+    <MainComponent v-show="sharedData.showMain == true"/>
     <transition name="fade">
       <div id="pagetop" v-show="scY > 300" @click="toTop">
         <i class="fa-solid fa-chevron-up"></i>
       </div>
     </transition>
-    
   </div>
 </template>
 
 <script>
 
+import sharedData from './shared/sharedData';
 import HeaderComponent from './components/HeaderComponent.vue';
 import MainComponent from './components/MainComponent.vue';
+import OnLoadMain from './components/OnLoadMain.vue';
 
 export default {
 
@@ -25,8 +27,11 @@ export default {
   data() {
 
       return {
+
         scTimer: 0,
         scY: 0,
+        sharedData,
+
       };
 
     },
@@ -35,6 +40,7 @@ export default {
 
     HeaderComponent,
     MainComponent,
+    OnLoadMain,
 
   },
 

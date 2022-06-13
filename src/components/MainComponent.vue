@@ -1,5 +1,5 @@
 <template>
-    <main class="container py-3">
+    <main class="main-component container py-3">
         <div class="movies-container mb-4">
             <h2 class="section-title mb-3">MOVIES:</h2>
             <movieCard :card="movie" :genres="moviesGenre" v-for="movie in movies" :key="movie.id"/>
@@ -128,6 +128,7 @@ export default {
         .section-title {
             width: 100%;
             color: white;
+            text-shadow: 2px 2px 1px rgb(150, 17, 17);
         }
 
     }
