@@ -57,7 +57,7 @@ header {
 
         img {
             height: 100%;
-            filter: drop-shadow(1px 1px 2px black);
+            filter: drop-shadow(2px 2px white);
         }
 
         .input-field {
