@@ -1,7 +1,8 @@
 <template>
     <header>
         <div class="header-component container d-flex justify-content-between">
-            <img src="../assets/img/boolflix-extended-logo.png" alt="netflix-extended-logo.png">
+            <img class="logo" src="../assets/img/boolflix-extended-logo.png" alt="boolflix-extended-logo.png">
+            <img class="logo-mobile" src="../assets/img/boolflix-logo.png" alt="boolflix-logo.png">
             <div class="input-field d-flex">
                 <input id="input" type="text" placeholder="Search here..." spellcheck="false" v-model="search" @keyup.enter="inputSearch(); sharedData.showMain = true"/>
                 <button type="button" class="search-button btn btn-outline-secondary" @click="inputSearch(); sharedData.showMain = true">Go</button>
@@ -100,6 +101,26 @@ header {
 
     }
     
+}
+
+@media (min-width: 576px) {
+    .logo-mobile { 
+        display: none !important; 
+    }
+}
+
+@media screen and (max-width: 576px) {
+    input {
+        width: 100%;
+    }
+
+    .logo {
+        display: none !important;
+    }
+
+    button {
+        display: none !important;
+    }
 }
 
 </style>
