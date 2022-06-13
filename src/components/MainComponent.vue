@@ -6,7 +6,7 @@
         </div>
         <div class="series-container">
             <h2 class="section-title mb-3">SERIES:</h2>
-            <serieCard :card="serie" v-for="serie in series" :key="serie.id"/>
+            <serieCard :card="serie" :genres="seriesGenre" v-for="serie in series" :key="serie.id"/>
         </div>
     </main>
 </template>

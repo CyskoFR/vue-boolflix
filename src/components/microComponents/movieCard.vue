@@ -1,5 +1,5 @@
 <template>
-    <div class="movie-card" @click="isHidden = !isHidden">
+    <div class="movie-card" @click="isHidden = !isHidden" v-click-outside="onClickOutside">
         <Transition>
             <div class="movie-card_overlay" v-if="card.overview && !isHidden">{{card.overview}}</div>
         </Transition>
@@ -84,6 +84,10 @@ export default {
                 }
             });
             return genresArray
+        },
+
+        onClickOutside() {
+            this.isHidden = true;
         },
         
     }
@@ -173,7 +177,7 @@ export default {
             background-color: #c10e1aea;
             padding: 4px 8px;
             border-radius: 8px;
-            box-shadow: 1px 1px 1px rgb(80, 79, 79);
+            box-shadow: 1px 1px 1px rgb(135, 135, 135);
         }
 
     }
